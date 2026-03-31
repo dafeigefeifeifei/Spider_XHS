@@ -1,5 +1,7 @@
 __pycache__
 node_modules/
+outputs/
+.DS_Store
 *.so
 .Python
 build/
@@ -24,8 +26,8 @@ db.sqlite3
 __pypackages__/
 .venv
 env/
+.env
 venv/
 ENV/
 env.bak/
 venv.bak/
-

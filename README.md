@@ -1,141 +1,304 @@
-<p align="center">
-  <a href="https://github.com/cv-cat/Spider_XHS" target="_blank" align="center" alt="Go to XHS_Spider Website">
-    <picture>
-      <img width="220" src="https://github.com/user-attachments/assets/b817a5d2-4ca6-49e9-b7b1-efb07a4fb325" alt="Spider_XHS logo">
-    </picture>
-  </a>
-</p>
-
-
-<div align="center">
-    <a href="https://www.python.org/">
-        <img src="https://img.shields.io/badge/python-3.7%2B-blue" alt="Python 3.7+">
-    </a>
-    <a href="https://nodejs.org/zh-cn/">
-        <img src="https://img.shields.io/badge/nodejs-18%2B-blue" alt="NodeJS 18+">
-    </a>
-</div>
-
-
-
 # Spider_XHS
 
-**✨ 专业的小红书数据采集解决方案，支持笔记爬取，保存格式为excel或者media**
+小红书内容采集脚本，当前版本已经改成更适合直接使用的 CLI 模式，不需要再把查询条件写死在 `main.py` 里。
 
-**✨ 小红书全域运营解决方法，AI一键改写笔记（图文，视频）直接上传**
+运行后会生成一份可直接打开的 HTML 报告，并按任务时间自动创建输出目录，适合重复执行、对比结果和归档。
 
-## ⭐功能列表
+## 说明
 
-**⚠️ 任何涉及数据注入的操作都是不被允许的，本项目仅供学习交流使用，如有违反，后果自负**
+- 本项目仅供学习和研究接口、抓取流程、结果整理方式使用
+- 请自行评估目标站点的使用条款、风控策略和法律合规要求
+- 任何 Cookie、账号或代理都应由你自行保管
 
-| 模块           | 已实现                                                                             |
-|---------------|---------------------------------------------------------------------------------|
-| 小红书创作者平台 | ✅ 二维码登录<br/>✅ 手机验证码登录<br/>✅ 上传（图集、视频）作品<br/>✅查看自己上传的作品      |
-|    小红书PC    | ✅ 二维码登录<br/> ✅ 手机验证码登录<br/> ✅ 获取无水印图片<br/> ✅ 获取无水印视频<br/> ✅ 获取主页的所有频道<br/>✅ 获取主页推荐笔记<br/>✅ 获取某个用户的信息<br/>✅ 用户自己的信息<br/>✅ 获取某个用户上传的笔记<br/>✅ 获取某个用户所有的喜欢笔记<br/>✅ 获取某个用户所有的收藏笔记<br/>✅ 获取某个笔记的详细内容<br/>✅ 搜索笔记内容<br/>✅ 搜索用户内容<br/>✅ 获取某个笔记的评论<br/>✅ 获取未读消息信息<br/>✅ 获取收到的评论和@提醒信息<br/>✅ 获取收到的点赞和收藏信息<br/>✅ 获取新增关注信息|
+## 当前功能
 
+- 按关键词搜索笔记
+- 按单篇笔记链接抓取
+- 按用户主页抓取笔记
+- 支持多关键词查询
+- 支持多关键词“或”关系和“与”关系
+- 生成单页 HTML 报告
+- 输出原始 `data.json`
+- 可选下载图片和视频到本地
 
-## 🌟 功能特性
+## 环境要求
 
-- ✅ **多维度数据采集**
-  - 用户主页信息
-  - 笔记详细内容
-  - 智能搜索结果抓取
-- 🚀 **高性能架构**
-  - 自动重试机制
-- 🔒 **安全稳定**
-  - 小红书最新API适配
-  - 异常处理机制
-  - proxy代理
-- 🎨 **便捷管理**
-  - 结构化目录存储
-  - 格式化输出（JSON/EXCEL/MEDIA）
-  
-## 🎨效果图
-### 处理后的所有用户
-![image](https://github.com/cv-cat/Spider_XHS/assets/94289429/00902dbd-4da1-45bc-90bb-19f5856a04ad)
-### 某个用户所有的笔记
-![image](https://github.com/cv-cat/Spider_XHS/assets/94289429/880884e8-4a1d-4dc1-a4dc-e168dd0e9896)
-### 某个笔记具体的内容
-![image](https://github.com/cv-cat/Spider_XHS/assets/94289429/d17f3f4e-cd44-4d3a-b9f6-d880da626cc8)
-### 保存的excel
-![image](https://github.com/user-attachments/assets/707f20ed-be27-4482-89b3-a5863bc360e7)
-
-## 🛠️ 快速开始
-### ⛳运行环境
-- Python 3.7+
+- Python 3.10+
 - Node.js 18+
 
-### 🎯安装依赖
+建议统一用 `python3` 运行。
+
+## 安装
+
+### 1. 安装 Python 依赖
+
+```bash
+python3 -m pip install -r requirements.txt
 ```
-pip install -r requirements.txt
+
+### 2. 安装 Node 依赖
+
+```bash
 npm install
 ```
 
-### 🎨配置文件
-配置文件在项目根目录.env文件中，将下图自己的登录cookie放入其中，cookie获取➡️在浏览器f12打开控制台，点击网络，点击fetch，找一个接口点开
-![image](https://github.com/user-attachments/assets/6a7e4ecb-0432-4581-890a-577e0eae463d)
+如果你遇到 `Cannot find module 'crypto-js'`，通常就是这一步还没执行。
 
-复制cookie到.env文件中（注意！登录小红书后的cookie才是有效的，不登陆没有用）
-![image](https://github.com/user-attachments/assets/5e62bc35-d758-463e-817c-7dcaacbee13c)
+## 配置
 
-### 🚀运行项目
+项目通过根目录的 `.env` 读取 Cookie。
+
+`.env` 中至少需要：
+
+```env
+COOKIES=你的完整小红书登录 Cookie
 ```
-python main.py
+
+Cookie 获取方式：
+
+1. 浏览器登录小红书
+2. 打开开发者工具
+3. 找一个请求
+4. 复制完整请求头中的 `Cookie`
+5. 填入 `.env`
+
+## CLI 用法
+
+### 搜索笔记
+
+```bash
+python3 main.py search --query "湖北省妇幼"
 ```
 
-### 🗝️注意事项
-- main.py中的代码是爬虫的入口，可以根据自己的需求进行修改
-- apis/xhs_pc_apis.py 中的代码包含了所有的api接口，可以根据自己的需求进行修改
-- apis/xhs_creator_apis.py 中的代码包含了小红书创作者平台的api接口，可以根据自己的需求进行修改
+### 多关键词搜索
 
+默认是“或”关系：
 
-## 🍥日志
-   
-| 日期       | 说明                                        |
-|----------|-------------------------------------------|
-| 23/08/09 | - 首次提交                                    |
-| 23/09/13 | - api更改params增加两个字段，修复图片无法下载，有些页面无法访问导致报错 |
-| 23/09/16 | - 较大视频出现编码问题，修复视频编码问题，加入异常处理              |
-| 23/09/18 | - 代码重构，加入失败重试                             |
-| 23/09/19 | - 新增下载搜索结果功能                              |
-| 23/10/05 | - 新增跳过已下载功能，获取更详细的笔记和用户信息                 |
-| 23/10/08 | - 上传代码☞Pypi，可通过pip install安装本项目           |
-| 23/10/17 | - 搜索下载新增排序方式选项（1、综合排序 2、热门排序 3、最新排序）      |
-| 23/10/21 | - 新增图形化界面,上传至release v2.1.0               |
-| 23/10/28 | - Fix Bug 修复搜索功能出现的隐藏问题                   |
-| 25/03/18 | - 更新API，修复部分问题                            |
-| 25/06/07 | - 更新search接口，区分视频和图集下载，增加小红书创作者api        |
-| 25/07/15 | - 更新 xs version56 & 小红书创作者接口              |
+```bash
+python3 main.py search --query "湖北省妇幼" "街道口院区"
+```
 
+显式写法：
 
-## 🧸额外说明
-1. 感谢star⭐和follow📰！不时更新
-2. 作者的联系方式在主页里，有问题可以随时联系我
-3. 可以关注下作者的其他项目，欢迎 PR 和 issue
-4. 感谢赞助！如果此项目对您有帮助，请作者喝一杯奶茶~~ （开心一整天😊😊）
-5. thank you~~~
+```bash
+python3 main.py search --query "湖北省妇幼" "街道口院区" --query-mode any
+```
 
-<div align="center">
-  <img src="./author/wx_pay.png" width="400px" alt="微信赞赏码"> 
-  <img src="./author/zfb_pay.jpg" width="400px" alt="支付宝收款码">
-</div>
+### 多关键词“与”关系
 
+```bash
+python3 main.py search --query "湖北省妇幼" "街道口院区" --query-mode all
+```
 
-## 📈 Star 趋势
-<a href="https://www.star-history.com/#cv-cat/Spider_XHS&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=cv-cat/Spider_XHS&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=cv-cat/Spider_XHS&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=cv-cat/Spider_XHS&type=Date" />
- </picture>
-</a>
+`all` 模式的处理方式是：
 
-## 🍔 交流群
-如果你对爬虫和ai agent感兴趣，请加作者主页wx通过邀请加入群聊
+1. 先按各个关键词抓候选
+2. 再用标题、正文、标签、作者名做多关键词同时命中过滤
 
-ps: 群1、2已超过wx限制人数500，请加群3
+如果结果太少，可以增大 `--limit`。
 
-![06f69d67ff814b84e122bb32d123075b](https://github.com/user-attachments/assets/411eb15e-ea02-44e3-ae53-ff8f21d3f460)
+### 单篇笔记
 
+```bash
+python3 main.py note --url "https://www.xiaohongshu.com/explore/xxxx?xsec_token=xxxx"
+```
 
+### 用户主页
 
+```bash
+python3 main.py user --url "https://www.xiaohongshu.com/user/profile/xxxx?xsec_token=xxxx" --limit 20
+```
+
+## 常用参数
+
+### `search`
+
+```bash
+python3 main.py search \
+  --query "湖北省妇幼" "街道口院区" \
+  --query-mode all \
+  --limit 30 \
+  --sort latest \
+  --note-type normal \
+  --out outputs/hubei \
+  --save all
+```
+
+参数说明：
+
+- `--query`
+  一个或多个关键词
+- `--query-mode`
+  `any` 为或，`all` 为与
+- `--limit`
+  每个关键词抓取数量；`all` 模式下建议适当调大
+- `--sort`
+  可选：`general` `latest` `likes` `comments` `collects`
+- `--note-type`
+  可选：`all` `video` `normal`
+- `--out`
+  输出目录前缀
+- `--save`
+  可选：`html` `media` `all`
+- `--proxy`
+  可选代理，例如 `http://127.0.0.1:7890`
+
+### `note`
+
+```bash
+python3 main.py note \
+  --url "https://www.xiaohongshu.com/explore/xxxx?xsec_token=xxxx" \
+  --out outputs/single_note \
+  --save all
+```
+
+### `user`
+
+```bash
+python3 main.py user \
+  --url "https://www.xiaohongshu.com/user/profile/xxxx?xsec_token=xxxx" \
+  --limit 20 \
+  --out outputs/user_notes \
+  --save all
+```
+
+## 输出结果
+
+每次运行都会生成一个带时间戳的目录。
+
+例如：
+
+```text
+outputs/hubei_20260331_160215/
+  report.html
+  data.json
+  media/
+```
+
+即使你传的是：
+
+```bash
+--out outputs/hubei
+```
+
+最终也会自动变成：
+
+```text
+outputs/hubei_yyyyMMdd_HHmmss
+```
+
+这样可以避免覆盖旧报告。
+
+### `report.html`
+
+- 单页可阅读报告
+- 按笔记卡片展示内容
+- 支持图片直接嵌入
+- 视频优先使用本地文件
+- 会显示原始链接、作者主页、命中关键词等信息
+
+### `data.json`
+
+- 原始结构化数据
+- 适合自己二次处理
+- 可以配合脚本再次分析
+
+### `media/`
+
+当 `--save media` 或 `--save all` 时生成。
+
+- 图文笔记会下载图片
+- 视频笔记会下载封面和视频
+
+## 推荐用法
+
+### 只看报告，不下载媒体
+
+```bash
+python3 main.py search --query "湖北省妇幼" --save html
+```
+
+### 生成完整报告和本地媒体
+
+```bash
+python3 main.py search --query "湖北省妇幼" --save all
+```
+
+### 用“与关系”提高结果精度
+
+```bash
+python3 main.py search --query "湖北省妇幼" "街道口院区" --query-mode all --limit 50
+```
+
+## 常见问题
+
+### 1. `Cannot find module 'crypto-js'`
+
+说明 Node 依赖没装好：
+
+```bash
+npm install
+```
+
+### 2. `ModuleNotFoundError: No module named 'loguru'`
+
+说明 Python 依赖没装好：
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+### 3. `RuntimeError: 搜索未返回任何笔记链接`
+
+通常是：
+
+- Cookie 失效
+- 当前关键词没有返回结果
+- 请求被风控
+
+建议先换一个简单关键词试一下。
+
+### 4. `RuntimeError: 与关系没有匹配结果`
+
+说明当前抓到的候选内容里，没有笔记同时命中所有关键词。
+
+可尝试：
+
+- 增大 `--limit`
+- 换更宽松的关键词
+- 改用 `--query-mode any`
+
+### 5. 终端看起来不动了
+
+通常不是卡死，而是在下载媒体。可以直接查看输出目录里是否已经生成：
+
+- `report.html`
+- `data.json`
+- `media/`
+
+## 项目结构
+
+```text
+main.py                  CLI 入口
+apis/                    小红书接口封装
+xhs_utils/data_util.py   数据处理和旧导出逻辑
+xhs_utils/report_util.py HTML 报告生成
+static/                  JS 签名相关脚本
+```
+
+## 开发备注
+
+当前版本是“最小可用”方案，特点是：
+
+- 不引入数据库
+- 不做 Web 服务
+- 不做 GUI
+- 不做多页面站点
+- 直接生成单页 HTML 报告
+
+如果后续要继续扩展，比较合理的方向是：
+
+- 终端实时进度输出
+- 更稳定的下载超时与重试
+- 更细的查询过滤
+- Excel 与 HTML 并行导出
